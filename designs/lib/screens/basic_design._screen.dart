@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:designs/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class BasicDesignScreen extends StatelessWidget {
+  const BasicDesignScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     //final size = MediaQuery.of(context).size;
@@ -29,9 +31,9 @@ class _Paragraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-      child: const Text(
+      child: Text(
         'Do consectetur exercitation proident labore fugiat officia officia exercitation aute. Deserunt consectetur culpa in culpa sint ipsum adipisicing dolor duis ut. Duis adipisicing reprehenderit adipisicing eu elit magna consectetur sunt consectetur adipisicing magna. Reprehenderit consequat et nulla culpa. Anim velit voluptate eiusmod laboris dolore laborum ipsum.',
         textAlign: TextAlign.justify,
       ),
@@ -50,55 +52,10 @@ class _ButtonsCallRouteShare extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 60),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              Icon(
-                Icons.phone,
-                color: Colors.blue[500],
-                size: 25,
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Text(
-                'CALL',
-                style: TextStyle(color: Colors.blue[400]),
-              )
-            ],
-          ),
-          Column(
-            children: [
-              Icon(
-                Icons.directions_rounded,
-                color: Colors.blue[500],
-                size: 25,
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Text(
-                'ROUTE',
-                style: TextStyle(color: Colors.blue[400]),
-              )
-            ],
-          ),
-          Column(
-            children: [
-              Icon(
-                Icons.share,
-                color: Colors.blue[500],
-                size: 25,
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Text(
-                'SHARE',
-                style: TextStyle(color: Colors.blue[400]),
-              )
-            ],
-          )
+        children: const [
+          CustomButton(icon: Icons.phone, name: 'CALL'),
+          CustomButton(icon: Icons.map, name: 'ROUTE'),
+          CustomButton(icon: Icons.share, name: 'SHARE'),
         ],
       ),
     );
@@ -112,7 +69,6 @@ class _TitleSubtitleStar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
       child: Row(
@@ -135,9 +91,7 @@ class _TitleSubtitleStar extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(
-            width: 90,
-          ),
+          Expanded(child: Container()),
           const Icon(
             Icons.star_sharp,
             color: Colors.red,
