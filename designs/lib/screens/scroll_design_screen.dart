@@ -1,5 +1,6 @@
-import 'dart:core';
+// ignore_for_file: unnecessary_const
 
+import 'dart:core';
 import 'package:designs/models/weather.dart';
 import 'package:designs/provider/weather_provider.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,71 @@ class ScrollScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: const [_Background(), _BaseScreen()],
+      backgroundColor: const Color(0xff0098FA),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.5, 0.5],
+            colors: [
+              Color(0xff76eccc),
+              Color(0xff30BAD6),
+            ],
+          ),
+        ),
+        child: PageView(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          children: const [
+            Page1(),
+            Page2(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Page1 extends StatelessWidget {
+  const Page1({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: const [
+        _Background(),
+        _BaseScreen(),
+      ],
+    );
+  }
+}
+
+class Page2 extends StatelessWidget {
+  const Page2({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color(0xff30BAD6),
+      child: Center(
+        child: TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+              backgroundColor: const Color(0xff0098FA),
+              shape: const StadiumBorder()),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: Text(
+              'Welcome',
+              style: TextStyle(color: Colors.white, fontSize: 30),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -27,13 +91,14 @@ class _BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<_BaseScreen> {
-  final WeatherProvider weatherProvider = const WeatherProvider();
+  late final WeatherProvider weatherProvider = WeatherProvider();
   late Future<Weather> futureWeather;
   final now = Jiffy();
 
   @override
-  void initState() {
+  initState() {
     super.initState();
+
     futureWeather = weatherProvider.fetchWeather();
   }
 
@@ -48,7 +113,7 @@ class _BaseScreenState extends State<_BaseScreen> {
         ),
         _TemperatureText(futureWeather: futureWeather),
         const SizedBox(
-          height: 30,
+          height: 15,
         ),
         Text(
           now.EEEE,

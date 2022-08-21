@@ -1,9 +1,15 @@
 import 'package:designs/models/weather.dart';
+import 'package:designs/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class WeatherProvider extends StatelessWidget {
-  const WeatherProvider({Key? key}) : super(key: key);
+  LocationProvider locationProvider = const LocationProvider();
+
+  WeatherProvider({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
