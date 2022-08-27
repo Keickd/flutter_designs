@@ -3,13 +3,8 @@ import 'package:designs/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-// ignore: must_be_immutable
-class WeatherProvider extends StatelessWidget {
+class WeatherProvider extends ChangeNotifier {
   LocationProvider locationProvider = const LocationProvider();
-
-  WeatherProvider({
-    Key? key,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +15,10 @@ class WeatherProvider extends StatelessWidget {
     );
   }
 
-  Future<Weather> fetchWeather() async {
+  Future<Weather> fetchWeather(double latitude, double longitude) async {
     final response = await http.get(
       Uri.parse(
-          'https://api.openweathermap.org/data/2.5/weather?lat=41&lon=-0.8&appid=5e22eb0700e2225ae27d5ac7923abbf7'),
+          'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=5e22eb0700e2225ae27d5ac7923abbf7'),
     );
     if (response.statusCode == 200) {
       return Weather.fromJson(response.body);
